@@ -2,12 +2,19 @@ import React from 'react';
 import { supabase } from './lib/supabase';
 import AgentChat from './components/AgentChat';
 import LoginPage from './components/LoginPage';
+import SettingsPage from './components/SettingsPage';
 
 export default function App() {
   const [user, setUser] = React.useState(null);
   const [authLoading, setAuthLoading] = React.useState(true);
+  const [showSettings, setShowSettings] = React.useState(false);
 
   React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('crm_connected')) {
+      setShowSettings(true);
+      window.history.replaceState({}, '', window.location.pathname);
+    }
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null);
       setAuthLoading(false);
@@ -36,13 +43,16 @@ export default function App() {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
           <span style={{ color: '#555', fontSize: 13 }}>{user.email}</span>
-          <button onClick={() => supabase.auth.signOut()}
-            style={{ padding: '6px 14px', borderRadius: 7, border: '1px solid #2a2a3e', background: 'transparent', color: '#888', fontSize: 12, cursor: 'pointer' }}>
+          <button onClick={() => setShowSettings(true)} style={{ background: 'none', border: '1px solid #2a2a3e', borderRadius: 8, padding: '6px 14px', color: '#888', fontSize: 13, cursor: 'pointer' }}>
+            ⚙️ Settings
+          </button>
+          <button onClick={() => supabase.auth.signOut()} style={{ padding: '6px 14px', borderRadius: 7, border: '1px solid #2a2a3e', background: 'transparent', color: '#888', fontSize: 12, cursor: 'pointer' }}>
             Sign Out
           </button>
         </div>
       </nav>
       <AgentChat user={user} />
+      {showSettings && <SettingsPage user={user} onClose={() => setShowSettings(false)} />}
     </div>
   );
 }
