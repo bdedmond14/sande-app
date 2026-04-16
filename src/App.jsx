@@ -83,11 +83,11 @@ export default function App() {
     <ErrorBoundary>
       <div style={{ minHeight: '100vh', background: '#f5f4f0' }}>
         <nav style={{ background: '#0f0f1a', padding: '14px 32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1e1e2e' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <a href="https://trysandsoftware.com" style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
             <div style={{ width: 28, height: 28, borderRadius: 7, background: 'linear-gradient(135deg, #c9a96e, #a07840)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, fontWeight: 800, color: '#fff' }}>S</div>
             <span style={{ color: '#fff', fontWeight: 800, fontSize: 16, letterSpacing: '-0.3px' }}>Sand-E</span>
             <span style={{ background: 'rgba(201,169,110,0.15)', color: '#c9a96e', fontSize: 10, fontWeight: 700, padding: '2px 8px', borderRadius: 20, letterSpacing: '0.5px', textTransform: 'uppercase' }}>Agent</span>
-          </div>
+          </a>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             <span style={{ color: '#555', fontSize: 13 }}>{user.email}</span>
             <button onClick={() => setShowSettings(true)} style={{ background: 'none', border: '1px solid #2a2a3e', borderRadius: 8, padding: '6px 14px', color: '#888', fontSize: 13, cursor: 'pointer' }}>
